@@ -1,19 +1,20 @@
 package dev.maraz.weatherornot.ui.weather
 
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.map
+import androidx.hilt.lifecycle.ViewModelInject
+import androidx.lifecycle.*
+import dev.maraz.weatherornot.data.WeatherRepository
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
 
-class WeatherViewModel : ViewModel() {
+class WeatherViewModel @ViewModelInject constructor(
+    private val weatherRepository: WeatherRepository
+) : ViewModel() {
 
-    private val weatherIdx = MutableLiveData(0)
-    val weatherString: LiveData<String> = weatherIdx.map { dummyWeatherStrings[it % dummyWeatherStrings.size] }
+    val weatherData by lazy { weatherRepository.getCurrentWeather() }
 
-    fun refresh() {
-        weatherIdx.value = weatherIdx.value!! + 1
+    fun refresh() = viewModelScope.launch {
+        delay(500)
+        weatherRepository.refresh()
     }
 
 }
-
-private val dummyWeatherStrings = listOf("sunny", "raining", "snowing", "cloudy", "windy")

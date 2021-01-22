@@ -3,9 +3,11 @@ package dev.maraz.weatherornot.ui.weather
 import android.os.Bundle
 import android.view.View
 import android.widget.TextView
+import dagger.hilt.android.AndroidEntryPoint
 import dev.maraz.weatherornot.R
 import dev.maraz.weatherornot.ui.AbstractFragment
 
+@AndroidEntryPoint
 class WeatherFragment : AbstractFragment<WeatherViewModel>(WeatherViewModel::class) {
 
     override fun getViewResource() = R.layout.weather_fragment
@@ -14,9 +16,10 @@ class WeatherFragment : AbstractFragment<WeatherViewModel>(WeatherViewModel::cla
 
     override fun onStart() {
         super.onStart()
-        viewModel.weatherString.observe(this) {
-            tvMessage?.text = it
+        viewModel.weatherData.observe {
+            tvMessage?.text = it.toString()
         }
+        viewModel.refresh()
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
