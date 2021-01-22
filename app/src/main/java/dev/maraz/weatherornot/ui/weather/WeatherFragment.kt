@@ -1,26 +1,29 @@
 package dev.maraz.weatherornot.ui.weather
 
-import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
-import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
+import android.widget.TextView
 import dev.maraz.weatherornot.R
+import dev.maraz.weatherornot.ui.AbstractFragment
 
-class WeatherFragment : Fragment() {
+class WeatherFragment : AbstractFragment<WeatherViewModel>(WeatherViewModel::class) {
 
-    private lateinit var viewModel: WeatherViewModel
+    override fun getViewResource() = R.layout.weather_fragment
 
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
-    ): View {
-        return inflater.inflate(R.layout.weather_fragment, container, false)
+    private val tvMessage get() = view?.findViewById<TextView>(R.id.tvMessage)
+
+    override fun onStart() {
+        super.onStart()
+        viewModel.weatherString.observe(this) {
+            tvMessage?.text = it
+        }
     }
 
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
-        viewModel = ViewModelProvider(this).get(WeatherViewModel::class.java)
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        tvMessage?.setOnClickListener {
+            viewModel.refresh()
+        }
     }
 
 }
