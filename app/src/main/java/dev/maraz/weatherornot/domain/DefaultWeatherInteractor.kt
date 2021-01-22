@@ -2,7 +2,7 @@ package dev.maraz.weatherornot.domain
 
 import androidx.lifecycle.LiveData
 import dev.maraz.weatherornot.data.WeatherRepository
-import dev.maraz.weatherornot.domain.model.WeatherCastDataSet
+import dev.maraz.weatherornot.domain.model.WeatherCastData
 import javax.inject.Inject
 import javax.inject.Singleton
 
@@ -13,7 +13,7 @@ class DefaultWeatherInteractor @Inject constructor(
 
     private val woeid = 804365L // TODO don't hardcode woeid here
 
-    override fun getCurrentWeather(updateFromRemote: Boolean): LiveData<Result<WeatherCastDataSet>> {
+    override fun getCurrentWeather(updateFromRemote: Boolean): LiveData<List<WeatherCastData>?> {
         // TODO take time into account (forecasts)
         return weatherRepository.getWeatherCastDataSet(woeid, updateFromRemote)
     }

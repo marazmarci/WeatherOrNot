@@ -36,9 +36,8 @@ class WeatherFragment : AbstractFragment<WeatherViewModel>(WeatherViewModel::cla
 
     override fun onStart() {
         super.onStart()
-        viewModel.latestWeatherData.observe { result ->
-            val dataSet = result.getOrNull()
-            dataSet?.castData?.firstOrNull()?.let { weather ->
+        viewModel.latestWeatherData.observe { dataSet ->
+            dataSet?.firstOrNull()?.let { weather ->
                 tvTemperature.text = resources.getString(
                     R.string.celsius_template,
                     temperatureDecimalFormat.format(weather.celsiusTemperature)
@@ -46,7 +45,7 @@ class WeatherFragment : AbstractFragment<WeatherViewModel>(WeatherViewModel::cla
 
                 tvWeatherStateName.text = weather.weatherState.name
 
-                tvLocationName.text = dataSet.locationName
+                tvLocationName.text = weather.locationName
 
                 lifecycleScope.launch {
                     dataAgeUpdaterJob?.cancel()

@@ -7,5 +7,7 @@ data class WeatherCastData(
     val celsiusTemperature: Double,
     val weatherState: WeatherState,
     val applicableDate: LocalDate,
-    val timestampUpdated: LocalDateTime
+    val timestampUpdated: LocalDateTime,
+    val locationName: String,
+    val woeid: Long
 )
