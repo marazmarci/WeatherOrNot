@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">Weather Or Not</string>
+
+    <string name="celsius_template">%s °C</string>
+    <string name="just_now">just now</string>
+    <string name="weather_icon">Weather icon</string>
 </resources>

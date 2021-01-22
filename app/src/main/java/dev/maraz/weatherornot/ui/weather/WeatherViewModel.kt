@@ -14,7 +14,7 @@ class WeatherViewModel @ViewModelInject constructor(
     private val weatherInteractor: WeatherInteractor
 ) : ViewModel() {
 
-    val latestWeatherData by lazy { weatherInteractor.getCurrentWeather() }
+    val latestWeatherData by lazy { weatherInteractor.getCurrentWeather(false) }
 
     private val refreshingState = MutableStateFlow(NOT_REFRESHING)
 

@@ -5,7 +5,7 @@ import dev.maraz.weatherornot.domain.model.WeatherCastDataSet
 
 interface WeatherInteractor {
 
-    fun getCurrentWeather(): LiveData<Result<WeatherCastDataSet>>
+    fun getCurrentWeather(updateFromRemote: Boolean): LiveData<Result<WeatherCastDataSet>>
 
     suspend fun refreshFromNetwork(): Result<Unit>
 

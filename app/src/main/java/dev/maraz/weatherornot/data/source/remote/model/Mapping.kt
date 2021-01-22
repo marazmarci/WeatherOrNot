@@ -1,6 +1,5 @@
-package dev.maraz.weatherornot.data
+package dev.maraz.weatherornot.data.source.remote.model
 
-import dev.maraz.weatherornot.data.source.remote.model.GetWeatherByLocationResponse
 import dev.maraz.weatherornot.domain.model.WeatherCastData
 import dev.maraz.weatherornot.domain.model.WeatherCastDataSet
 import dev.maraz.weatherornot.domain.model.WeatherState

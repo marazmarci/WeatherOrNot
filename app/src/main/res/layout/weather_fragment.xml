@@ -14,14 +14,55 @@
 
         <TextView
             android:id="@+id/tvTemperature"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:text="Here Comes The Sun"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            android:layout_marginBottom="24dp"
+            android:gravity="center"
+            app:layout_constraintBottom_toTopOf="@+id/tvDataAge"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tvLocationName"
+            tools:text="23.45 °C" />
+
+        <TextView
+            android:id="@+id/tvLocationName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            app:layout_constraintBottom_toTopOf="@+id/tvTemperature"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_chainStyle="packed"
+            tools:text="Budapest" />
+
+        <TextView
+            android:id="@+id/tvDataAge"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:gravity="center"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toBottomOf="@+id/tvTemperature"
+            tools:text="1m ago" />
+
+        <ImageView
+            android:id="@+id/ivWeather"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:contentDescription="@string/weather_icon"
+            app:layout_constraintBottom_toTopOf="@+id/tvLocationName"
+            app:layout_constraintDimensionRatio="1"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintWidth_percent="0.25"
+            tools:src="@tools:sample/avatars" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

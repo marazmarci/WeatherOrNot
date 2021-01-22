@@ -13,12 +13,13 @@ class DefaultWeatherInteractor @Inject constructor(
 
     private val woeid = 804365L // TODO don't hardcode woeid here
 
-    override fun getCurrentWeather(): LiveData<Result<WeatherCastDataSet>> {
-        return weatherRepository.getCurrentWeather()
+    override fun getCurrentWeather(updateFromRemote: Boolean): LiveData<Result<WeatherCastDataSet>> {
+        // TODO take time into account (forecasts)
+        return weatherRepository.getWeatherCastDataSet(woeid, updateFromRemote)
     }
 
     override suspend fun refreshFromNetwork(): Result<Unit> {
-        return weatherRepository.refreshFromNetwork(woeid)
+        return weatherRepository.refreshFromRemoteAndSaveLocally(woeid)
     }
 
 }
