@@ -70,18 +70,19 @@ class WeatherFragment : AbstractFragment<WeatherViewModel>(WeatherViewModel::cla
     }
 
     private fun Duration.toStringPretty() =
-        if (seconds == 0L)
-            getString(R.string.just_now)
+        if (seconds < 5L)
+            getString(R.string.updated_just_now)
         else
             toString()
                 .substring(2)
                 .replace("(\\d[HMS])(?!$)", "$1 ")
+                .toLowerCase(Locale.ROOT)
                 .replace("h", "h ")
                 .replace("m", "m ")
-                .toLowerCase(Locale.ROOT)
                 .let {
-                    resources.getString(R.string.time_ago_template, it)
+                    resources.getString(R.string.updated_time_ago_template, it)
                 }
+                .replace("  ", " ")
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
