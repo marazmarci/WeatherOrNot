@@ -6,10 +6,7 @@ import dev.maraz.weatherornot.data.source.local.model.toDomainModels
 import dev.maraz.weatherornot.data.source.remote.WeatherRemoteDataSource
 import dev.maraz.weatherornot.data.source.remote.model.toDomainModel
 import dev.maraz.weatherornot.domain.model.WeatherCastData
-import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.filterNotNull
-import kotlinx.coroutines.flow.firstOrNull
-import kotlinx.coroutines.flow.map
+import kotlinx.coroutines.flow.*
 import java.time.Duration
 import java.time.LocalDateTime
 import javax.inject.Inject
@@ -27,6 +24,8 @@ class DefaultWeatherRepository @Inject constructor(
     }
 
     override val isLoadingFromNetwork = MutableStateFlow(false)
+
+    override val networkErrors = MutableSharedFlow<Throwable>()
 
     // TODO publish network errors
 
@@ -48,13 +47,17 @@ class DefaultWeatherRepository @Inject constructor(
             val wasLoading = !isLoadingFromNetwork.compareAndSet(expect = false, update = true)
             if (wasLoading)
                 return
-            val result = weatherRemoteDataSource.getWeatherByLocation(woeid)
+            weatherRemoteDataSource.getWeatherByLocation(woeid)
                 .map { response ->
                     val now = LocalDateTime.now()
                     response.toDomainModel(now)
                 }.onSuccess {
-                    weatherLocalDataSource.deleteAllWeatherCastData()
-                    weatherLocalDataSource.saveWeatherCastData(it.toDbModels())
+                    with(weatherLocalDataSource) {
+                        deleteAllWeatherCastData()
+                        saveWeatherCastData(it.toDbModels())
+                    }
+                }.onFailure {
+                    networkErrors.emit(it)
                 }
             // TODO handle network errors
             isLoadingFromNetwork.value = false

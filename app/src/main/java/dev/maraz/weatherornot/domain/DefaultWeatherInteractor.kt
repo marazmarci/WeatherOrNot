@@ -14,6 +14,7 @@ class DefaultWeatherInteractor @Inject constructor(
 ) : WeatherInteractor {
 
     override val isLoadingFromNetwork get() = weatherRepository.isLoadingFromNetwork
+    override val networkErrors get() = weatherRepository.networkErrors
 
     override fun getCurrentWeather(): Flow<WeatherCastData> {
         return weatherRepository.getCurrentWeather()

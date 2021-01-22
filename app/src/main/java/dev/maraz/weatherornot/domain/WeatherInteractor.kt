@@ -12,4 +12,6 @@ interface WeatherInteractor {
 
     val isLoadingFromNetwork: StateFlow<Boolean>
 
+    val networkErrors: Flow<Throwable>
+
 }

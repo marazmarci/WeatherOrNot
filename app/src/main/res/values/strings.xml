@@ -6,4 +6,6 @@
     <string name="updated_just_now">updated just now</string>
     <string name="updated_time_ago_template">updated %s ago</string>
     <string name="weather_icon">Weather icon</string>
+    <string name="network_error_template">network error: %s 😢</string>
+    <string name="network_error">network error 😢</string>
 </resources>

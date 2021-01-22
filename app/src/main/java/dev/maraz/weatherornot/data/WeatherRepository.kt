@@ -12,4 +12,6 @@ interface WeatherRepository {
 
     val isLoadingFromNetwork: StateFlow<Boolean>
 
+    val networkErrors: Flow<Throwable>
+
 }

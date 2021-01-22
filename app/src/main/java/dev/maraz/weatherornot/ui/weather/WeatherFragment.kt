@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.View
 import android.widget.ImageView
 import android.widget.TextView
+import android.widget.Toast
 import androidx.lifecycle.lifecycleScope
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import coil.load
@@ -67,7 +68,17 @@ class WeatherFragment : AbstractFragment<WeatherViewModel>(WeatherViewModel::cla
 
             } // ?: TODO("error state")
         }
+
         viewModel.isLoading.observe(swipeRefreshLayout::setRefreshing)
+
+        viewModel.networkErrors.observe { error ->
+            val msg = if (error == null)
+                resources.getString(R.string.network_error)
+            else
+                resources.getString(R.string.network_error_template, error)
+            Toast.makeText(context, msg, Toast.LENGTH_LONG).show()
+        }
+
         viewModel.load()
     }
 

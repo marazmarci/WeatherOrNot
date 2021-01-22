@@ -5,6 +5,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.asLiveData
 import androidx.lifecycle.viewModelScope
 import dev.maraz.weatherornot.domain.WeatherInteractor
+import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.launch
 
 class WeatherViewModel @ViewModelInject constructor(
@@ -16,6 +17,10 @@ class WeatherViewModel @ViewModelInject constructor(
     }
 
     val isLoading get() = weatherInteractor.isLoadingFromNetwork.asLiveData()
+    val networkErrors get() = weatherInteractor.networkErrors
+        .map {
+            it.localizedMessage ?: it::class.simpleName
+        }.asLiveData()
 
     private var isFirstLoadCall = true
 
