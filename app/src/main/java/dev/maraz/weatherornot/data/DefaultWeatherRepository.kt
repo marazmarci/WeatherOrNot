@@ -2,7 +2,6 @@ package dev.maraz.weatherornot.data
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.liveData
-import dev.maraz.weatherornot.data.model.CelsiusTemperature
 import dev.maraz.weatherornot.data.model.WeatherCastData
 import dev.maraz.weatherornot.data.model.WeatherState
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -31,7 +30,7 @@ class DefaultWeatherRepository @Inject constructor(
 
     override suspend fun refresh() {
         weather.value = WeatherCastData(
-            CelsiusTemperature(Random.nextDouble(-10.0, 35.0)),
+            Random.nextDouble(-10.0, 35.0),
             weatherState = WeatherState("lr", "Light Rain"),
             LocalDate.now(),
             LocalDateTime.now(),

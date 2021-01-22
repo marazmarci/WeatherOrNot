@@ -4,7 +4,7 @@ import java.time.LocalDate
 import java.time.LocalDateTime
 
 data class WeatherCastData(
-    val temperature: CelsiusTemperature,
+    val celsiusTemperature: Double,
     val weatherState: WeatherState,
     val applicableDate: LocalDate,
     val timestampUpdated: LocalDateTime
