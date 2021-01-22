@@ -21,7 +21,7 @@ import java.util.*
 @AndroidEntryPoint
 class WeatherFragment : AbstractFragment<WeatherViewModel>(WeatherViewModel::class) {
 
-    private val temperatureDecimalFormat = DecimalFormat("#.##")
+    private val temperatureDecimalFormat = DecimalFormat("#.#")
 
     override fun getViewResource() = R.layout.weather_fragment
 
