@@ -2,16 +2,14 @@ package dev.maraz.weatherornot.ui.weather
 
 import android.os.Bundle
 import android.view.View
-import android.widget.ImageView
-import android.widget.TextView
 import android.widget.Toast
 import androidx.lifecycle.lifecycleScope
-import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import coil.load
 import dagger.hilt.android.AndroidEntryPoint
 import dev.maraz.weatherornot.R
 import dev.maraz.weatherornot.ui.AbstractFragment
 import dev.maraz.weatherornot.ui.WeatherIconUrls
+import kotlinx.android.synthetic.main.weather_fragment.*
 import kotlinx.coroutines.*
 import java.text.DecimalFormat
 import java.time.Duration
@@ -25,13 +23,6 @@ class WeatherFragment : AbstractFragment<WeatherViewModel>(WeatherViewModel::cla
     private val temperatureDecimalFormat = DecimalFormat("#.#")
 
     override fun getViewResource() = R.layout.weather_fragment
-
-    private val tvTemperature get() = view?.findViewById<TextView>(R.id.tvTemperature)!!
-    private val tvWeatherStateName get() = view?.findViewById<TextView>(R.id.tvWeatherStateName)!!
-    private val tvLocationName get() = view?.findViewById<TextView>(R.id.tvLocationName)!!
-    private val tvDataAge get() = view?.findViewById<TextView>(R.id.tvDataAge)!!
-    private val ivWeather get() = view?.findViewById<ImageView>(R.id.ivWeather)!!
-    private val swipeRefreshLayout get() = view?.findViewById<SwipeRefreshLayout>(R.id.swipeRefreshLayout)!!
 
     private var dataAgeUpdaterJob: Job? = null
 
