@@ -27,8 +27,6 @@ class DefaultWeatherRepository @Inject constructor(
 
     override val networkErrors = MutableSharedFlow<Throwable>()
 
-    // TODO publish network errors
-
     private var latestLocalData: List<WeatherCastData>? = null
 
     override fun getCurrentWeather() =
@@ -59,7 +57,6 @@ class DefaultWeatherRepository @Inject constructor(
                 }.onFailure {
                     networkErrors.emit(it)
                 }
-            // TODO handle network errors
             isLoadingFromNetwork.value = false
         }
     }

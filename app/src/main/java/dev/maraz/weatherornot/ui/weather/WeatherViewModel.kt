@@ -5,7 +5,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.asLiveData
 import androidx.lifecycle.viewModelScope
 import dev.maraz.weatherornot.domain.WeatherInteractor
-import kotlinx.coroutines.flow.map
+import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
 
 class WeatherViewModel @ViewModelInject constructor(
@@ -21,6 +21,16 @@ class WeatherViewModel @ViewModelInject constructor(
         .map {
             it.localizedMessage ?: it::class.simpleName
         }.asLiveData()
+    val isErrorState by lazy {
+        with(weatherInteractor) {
+            flow {
+                networkErrors.first()
+                isLoadingFromNetwork.collect {isLoading ->
+                    emit(!isLoading && weatherData.value == null)
+                }
+            }
+        }.asLiveData()
+    }
 
     private var isFirstLoadCall = true
 

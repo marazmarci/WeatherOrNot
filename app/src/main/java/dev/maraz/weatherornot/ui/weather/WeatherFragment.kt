@@ -66,7 +66,7 @@ class WeatherFragment : AbstractFragment<WeatherViewModel>(WeatherViewModel::cla
                 val weatherIconUri = WeatherIconUrls[weatherState]
                 ivWeather.load(weatherIconUri)
 
-            } // ?: TODO("error state")
+            }
         }
 
         viewModel.isLoading.observe(swipeRefreshLayout::setRefreshing)
@@ -77,6 +77,12 @@ class WeatherFragment : AbstractFragment<WeatherViewModel>(WeatherViewModel::cla
             else
                 resources.getString(R.string.network_error_template, error)
             Toast.makeText(context, msg, Toast.LENGTH_LONG).show()
+        }
+
+        viewModel.isErrorState.observe { error ->
+            if (error) {
+                tvTemperature.setText(R.string.error_loading_data)
+            }
         }
 
         viewModel.load()
