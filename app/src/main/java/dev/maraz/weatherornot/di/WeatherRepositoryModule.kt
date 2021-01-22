@@ -12,6 +12,7 @@ import dev.maraz.weatherornot.data.WeatherRepository
 class WeatherRepositoryModule {
 
     @Provides
-    fun provideWeatherRepository(defaultWeatherRepository: DefaultWeatherRepository): WeatherRepository = defaultWeatherRepository
+    fun provideWeatherRepository(defaultWeatherRepository: DefaultWeatherRepository): WeatherRepository =
+        defaultWeatherRepository
 
 }

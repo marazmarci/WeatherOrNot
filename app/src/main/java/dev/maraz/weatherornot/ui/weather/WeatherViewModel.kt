@@ -10,11 +10,12 @@ class WeatherViewModel @ViewModelInject constructor(
     private val weatherRepository: WeatherRepository
 ) : ViewModel() {
 
+    private val woeid = 804365L // TODO don't hardcode woeid here
+
     val weatherData by lazy { weatherRepository.getCurrentWeather() }
 
     fun refresh() = viewModelScope.launch {
-        delay(500)
-        weatherRepository.refresh()
+        weatherRepository.refreshFromNetwork(woeid)
     }
 
 }
