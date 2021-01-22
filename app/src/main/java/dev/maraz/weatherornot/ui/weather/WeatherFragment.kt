@@ -19,11 +19,11 @@ class WeatherFragment : AbstractFragment<WeatherViewModel>(WeatherViewModel::cla
 
     override fun onStart() {
         super.onStart()
-        viewModel.weatherData.observe { dataSet ->
-            dataSet.castData.firstOrNull()?.let { todaysWeather ->
+        viewModel.weatherData.observe { result ->
+            tvMessage?.text = result.getOrNull()?.castData?.firstOrNull()?.let { todaysWeather ->
                 val tempStr = temperatureDecimalFormat.format(todaysWeather.celsiusTemperature)
-                tvMessage?.text = "$tempStr °C"
-            }
+                "$tempStr °C"
+            } ?: "error"
         }
         viewModel.refresh()
     }

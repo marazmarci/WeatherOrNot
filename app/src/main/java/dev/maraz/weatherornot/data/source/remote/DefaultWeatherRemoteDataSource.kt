@@ -9,9 +9,9 @@ class DefaultWeatherRemoteDataSource @Inject constructor(
     private val metaWeatherWebApi: MetaWeatherWebApi
 ) : WeatherRemoteDataSource {
 
-    override suspend fun getWeatherByLocation(woeid: Long): GetWeatherByLocationResponse {
-        // TODO network error handling
-        return metaWeatherWebApi.getWeatherByLocation(woeid)
-    }
+    override suspend fun getWeatherByLocation(woeid: Long): Result<GetWeatherByLocationResponse> =
+        runCatching {
+            metaWeatherWebApi.getWeatherByLocation(woeid)
+        }
 
 }

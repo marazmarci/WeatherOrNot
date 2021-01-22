@@ -4,6 +4,6 @@ import dev.maraz.weatherornot.data.source.remote.model.GetWeatherByLocationRespo
 
 interface WeatherRemoteDataSource {
 
-    suspend fun getWeatherByLocation(woeid: Long): GetWeatherByLocationResponse
+    suspend fun getWeatherByLocation(woeid: Long): Result<GetWeatherByLocationResponse>
 
 }

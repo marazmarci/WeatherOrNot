@@ -5,7 +5,7 @@ import dev.maraz.weatherornot.data.model.WeatherCastDataSet
 
 interface WeatherRepository {
 
-    fun getCurrentWeather(): LiveData<WeatherCastDataSet>
+    fun getCurrentWeather(): LiveData<Result<WeatherCastDataSet>>
 
     suspend fun refreshFromNetwork(woeid: Long): Boolean
 
