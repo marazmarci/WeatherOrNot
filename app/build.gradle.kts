@@ -93,3 +93,9 @@ dependencies {
 }
 
 fun ext(name: String) = rootProject.extra[name] as String
+
+tasks.withType<org.jetbrains.kotlin.gradle.tasks.KotlinCompile> {
+    kotlinOptions {
+        freeCompilerArgs = freeCompilerArgs + "-Xallow-result-return-type"
+    }
+}
