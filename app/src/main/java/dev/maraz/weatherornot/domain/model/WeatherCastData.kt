@@ -9,5 +9,6 @@ data class WeatherCastData(
     val applicableDate: LocalDate,
     val timestampUpdated: LocalDateTime,
     val locationName: String,
-    val woeid: Long
+    val woeid: Long,
+    val isForecast: Boolean = false
 )

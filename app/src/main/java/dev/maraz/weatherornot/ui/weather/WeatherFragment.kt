@@ -41,7 +41,10 @@ class WeatherFragment : AbstractFragment<WeatherViewModel>(WeatherViewModel::cla
                 tvTemperature.text = resources.getString(
                     R.string.celsius_template,
                     temperatureDecimalFormat.format(celsiusTemperature)
-                )
+                ).let {
+                    if (isForecast) "$it (${resources.getString(R.string.forecast)})"
+                    else it
+                }
 
                 tvWeatherStateName.text = weatherState.name
 

@@ -2,6 +2,7 @@
     <string name="app_name">Weather Or Not</string>
 
     <string name="celsius_template">%s °C</string>
+    <string name="forecast">forecast</string>
     <string name="updated_just_now">updated just now</string>
     <string name="updated_time_ago_template">updated %s ago</string>
     <string name="weather_icon">Weather icon</string>
