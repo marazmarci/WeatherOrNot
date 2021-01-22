@@ -37,7 +37,7 @@ class WeatherFragment : AbstractFragment<WeatherViewModel>(WeatherViewModel::cla
     override fun onStart() {
         super.onStart()
         viewModel.weatherData.observe { dataSet ->
-            dataSet?.apply {
+            dataSet.apply {
                 tvTemperature.text = resources.getString(
                     R.string.celsius_template,
                     temperatureDecimalFormat.format(celsiusTemperature)

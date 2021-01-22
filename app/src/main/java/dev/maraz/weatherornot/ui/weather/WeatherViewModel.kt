@@ -12,7 +12,7 @@ class WeatherViewModel @ViewModelInject constructor(
 ) : ViewModel() {
 
     val weatherData by lazy {
-        weatherInteractor.getCurrentWeather()
+        weatherInteractor.getCurrentWeather().asLiveData()
     }
 
     val isLoading get() = weatherInteractor.isLoadingFromNetwork.asLiveData()

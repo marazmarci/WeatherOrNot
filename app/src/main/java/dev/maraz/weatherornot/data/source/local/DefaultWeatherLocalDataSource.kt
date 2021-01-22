@@ -1,8 +1,8 @@
 package dev.maraz.weatherornot.data.source.local
 
-import androidx.lifecycle.LiveData
 import dev.maraz.weatherornot.data.source.local.dao.WeatherDao
 import dev.maraz.weatherornot.data.source.local.model.DbWeatherCastData
+import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
 import javax.inject.Singleton
 
@@ -11,7 +11,7 @@ class DefaultWeatherLocalDataSource @Inject constructor(
     private val weatherDao: WeatherDao
 ) : WeatherLocalDataSource {
 
-    override fun getWeatherCastData(woeid: Long): LiveData<List<DbWeatherCastData>> =
+    override fun getWeatherCastData(woeid: Long): Flow<List<DbWeatherCastData>> =
         weatherDao.getWeatherCastData(woeid)
 
     override suspend fun saveWeatherCastData(weatherCastData: List<DbWeatherCastData>) =

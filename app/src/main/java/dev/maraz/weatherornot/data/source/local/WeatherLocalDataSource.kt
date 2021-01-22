@@ -1,11 +1,11 @@
 package dev.maraz.weatherornot.data.source.local
 
-import androidx.lifecycle.LiveData
 import dev.maraz.weatherornot.data.source.local.model.DbWeatherCastData
+import kotlinx.coroutines.flow.Flow
 
 interface WeatherLocalDataSource {
 
-    fun getWeatherCastData(woeid: Long): LiveData<List<DbWeatherCastData>>
+    fun getWeatherCastData(woeid: Long): Flow<List<DbWeatherCastData>>
 
     suspend fun saveWeatherCastData(weatherCastData: List<DbWeatherCastData>)
 

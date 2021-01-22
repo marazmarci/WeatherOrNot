@@ -1,14 +1,14 @@
 package dev.maraz.weatherornot.data
 
-import androidx.lifecycle.LiveData
 import dev.maraz.weatherornot.domain.model.WeatherCastData
+import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.StateFlow
 
 interface WeatherRepository {
 
-    fun getCurrentWeather(): LiveData<List<WeatherCastData>?>
+    fun getCurrentWeather(): Flow<List<WeatherCastData>>
 
-    suspend fun refreshFromRemoteAndSaveLocally(forceRefresh: Boolean)
+    suspend fun refreshFromNetworkIfCacheHasExpired(forceRefresh: Boolean)
 
     val isLoadingFromNetwork: StateFlow<Boolean>
 
