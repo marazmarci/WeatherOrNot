@@ -36,30 +36,30 @@ class WeatherFragment : AbstractFragment<WeatherViewModel>(WeatherViewModel::cla
 
     override fun onStart() {
         super.onStart()
-        viewModel.latestWeatherData.observe { dataSet ->
-            dataSet?.firstOrNull()?.let { weather ->
+        viewModel.weatherData.observe { dataSet ->
+            dataSet?.apply {
                 tvTemperature.text = resources.getString(
                     R.string.celsius_template,
-                    temperatureDecimalFormat.format(weather.celsiusTemperature)
+                    temperatureDecimalFormat.format(celsiusTemperature)
                 )
 
-                tvWeatherStateName.text = weather.weatherState.name
+                tvWeatherStateName.text = weatherState.name
 
-                tvLocationName.text = weather.locationName
+                tvLocationName.text = locationName
 
                 lifecycleScope.launch {
                     dataAgeUpdaterJob?.cancel()
                     dataAgeUpdaterJob = coroutineContext.job
                     while (isActive) {
                         val now = LocalDateTime.now().truncatedTo(ChronoUnit.SECONDS)
-                        val update = weather.timestampUpdated.truncatedTo(ChronoUnit.SECONDS)
+                        val update = timestampUpdated.truncatedTo(ChronoUnit.SECONDS)
                         val dataAge = Duration.between(update, now)
                         tvDataAge.text = dataAge.toStringPretty()
                         delay(1000)
                     }
                 }
 
-                val weatherIconUri = WeatherIconUrls[weather.weatherState]
+                val weatherIconUri = WeatherIconUrls[weatherState]
                 ivWeather.load(weatherIconUri)
 
             } // ?: TODO("error state")

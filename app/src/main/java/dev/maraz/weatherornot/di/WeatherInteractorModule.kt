@@ -12,7 +12,7 @@ import dev.maraz.weatherornot.domain.WeatherInteractor
 class WeatherInteractorModule {
 
     @Provides
-    fun provideWeatherInteractor(defaultWeatherRepository: DefaultWeatherInteractor): WeatherInteractor =
-        defaultWeatherRepository
+    fun provideWeatherInteractor(defaultWeatherInteractor: DefaultWeatherInteractor): WeatherInteractor =
+        defaultWeatherInteractor
 
 }
