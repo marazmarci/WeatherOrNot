@@ -60,15 +60,22 @@ dependencies {
     implementation("androidx.lifecycle:lifecycle-livedata-ktx:$ktxLifecycleVersion")
     implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:$ktxLifecycleVersion")
 
+    // Room
+    val roomVersion = "2.2.6"
+    implementation("androidx.room:room-runtime:$roomVersion")
+    kapt("androidx.room:room-compiler:$roomVersion")
+    implementation("androidx.room:room-ktx:$roomVersion")
+    //testImplementation("androidx.room:room-testing:$roomVersion")
+
     // Retrofit
     val retrofitVersion = "2.9.0"
     implementation("com.squareup.retrofit2:retrofit:$retrofitVersion")
     implementation("com.squareup.retrofit2:converter-gson:$retrofitVersion")
 
     // OkHttp
-    val okhttpVersion = "4.9.0"
-    implementation("com.squareup.okhttp3:okhttp:$okhttpVersion")
-    implementation("com.squareup.okhttp3:logging-interceptor:$okhttpVersion")
+    val okHttpVersion = "4.9.0"
+    implementation("com.squareup.okhttp3:okhttp:$okHttpVersion")
+    implementation("com.squareup.okhttp3:logging-interceptor:$okHttpVersion")
 
     // Kotlin Serialization
     implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.0.1")
