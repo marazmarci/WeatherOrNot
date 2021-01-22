@@ -1,6 +1,8 @@
 plugins {
     id("com.android.application")
     kotlin("android")
+    kotlin("kapt")
+    id("dagger.hilt.android.plugin")
 }
 
 android {
@@ -36,10 +38,22 @@ dependencies {
 
     // Kotlin
     implementation(kotlin("stdlib", ext("kotlinVersion")))
+    val coroutinesVersion = "1.4.2"
+    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:$coroutinesVersion")
+    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:$coroutinesVersion")
+
+    // Hilt
+    val hiltVersion = ext("hiltVersion")
+    val hiltAndroidXVersion = "1.0.0-alpha02"
+    implementation("com.google.dagger:hilt-android:$hiltVersion")
+    implementation("androidx.hilt:hilt-lifecycle-viewmodel:$hiltAndroidXVersion")
+    kapt("com.google.dagger:hilt-android-compiler:$hiltVersion")
+    kapt("androidx.hilt:hilt-compiler:$hiltAndroidXVersion")
 
     // AndroidX
     implementation("androidx.appcompat:appcompat:1.2.0")
     implementation("androidx.core:core-ktx:1.3.2")
+    implementation("androidx.fragment:fragment-ktx:1.2.5")
     val ktxLifecycleVersion = "2.2.0"
     implementation("androidx.lifecycle:lifecycle-livedata-ktx:$ktxLifecycleVersion")
     implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:$ktxLifecycleVersion")
