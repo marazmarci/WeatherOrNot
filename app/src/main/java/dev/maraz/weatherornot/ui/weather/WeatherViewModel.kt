@@ -21,8 +21,13 @@ class WeatherViewModel @ViewModelInject constructor(
     val isRefreshingInitiatedByUser
         get() = refreshingState.map { it.isManual }.asLiveData()
 
+    private var isFirstLoadCall = true
+
     fun load() {
-        refresh(isManual = false)
+        if (isFirstLoadCall) {
+            isFirstLoadCall = false
+            refresh(isManual = false)
+        }
     }
 
     fun refresh() {
