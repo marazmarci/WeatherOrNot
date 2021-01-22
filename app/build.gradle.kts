@@ -15,7 +15,7 @@ android {
         targetSdkVersion(30)
         versionCode = 1
         versionName = "1.0"
-
+        multiDexEnabled = true
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
 
@@ -66,6 +66,7 @@ dependencies {
     implementation("com.google.android.material:material:1.2.1")
 
     coreLibraryDesugaring("com.android.tools:desugar_jdk_libs:1.1.1")
+    implementation("androidx.multidex:multidex:2.0.1")
 
     // Testing
     testImplementation("junit:junit:4.13.1")
