@@ -80,6 +80,9 @@ dependencies {
     // Material Components
     implementation("com.google.android.material:material:1.2.1")
 
+    // SwipeRefreshLayout
+    implementation("androidx.swiperefreshlayout:swiperefreshlayout:1.1.0")
+
     // Desugar
     coreLibraryDesugaring("com.android.tools:desugar_jdk_libs:1.1.1")
 
