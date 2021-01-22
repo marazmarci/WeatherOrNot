@@ -10,6 +10,7 @@ buildscript {
     dependencies {
         classpath("com.android.tools.build:gradle:4.1.2")
         classpath(kotlin("gradle-plugin", kotlinVersion))
+        classpath(kotlin("serialization", kotlinVersion))
         classpath("com.google.dagger:hilt-android-gradle-plugin:$hiltVersion")
     }
 }

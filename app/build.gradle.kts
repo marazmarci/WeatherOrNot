@@ -2,6 +2,7 @@ plugins {
     id("com.android.application")
     kotlin("android")
     kotlin("kapt")
+    id("kotlinx-serialization")
     id("dagger.hilt.android.plugin")
 }
 
@@ -59,13 +60,30 @@ dependencies {
     implementation("androidx.lifecycle:lifecycle-livedata-ktx:$ktxLifecycleVersion")
     implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:$ktxLifecycleVersion")
 
+    // Retrofit
+    val retrofitVersion = "2.9.0"
+    implementation("com.squareup.retrofit2:retrofit:$retrofitVersion")
+    implementation("com.squareup.retrofit2:converter-gson:$retrofitVersion")
+
+    // OkHttp
+    val okhttpVersion = "4.9.0"
+    implementation("com.squareup.okhttp3:okhttp:$okhttpVersion")
+    implementation("com.squareup.okhttp3:logging-interceptor:$okhttpVersion")
+
+    // Kotlin Serialization
+    implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.0.1")
+    implementation("com.jakewharton.retrofit:retrofit2-kotlinx-serialization-converter:0.8.0")
+
     // ConstraintLayout
     implementation("androidx.constraintlayout:constraintlayout:2.0.4")
 
     // Material Components
     implementation("com.google.android.material:material:1.2.1")
 
+    // Desugar
     coreLibraryDesugaring("com.android.tools:desugar_jdk_libs:1.1.1")
+
+    // MultiDex
     implementation("androidx.multidex:multidex:2.0.1")
 
     // Testing
