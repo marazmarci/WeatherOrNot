@@ -5,54 +5,36 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.asLiveData
 import androidx.lifecycle.viewModelScope
 import dev.maraz.weatherornot.domain.WeatherInteractor
-import dev.maraz.weatherornot.ui.weather.WeatherViewModel.RefreshingState.*
 import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.launch
 
 class WeatherViewModel @ViewModelInject constructor(
     private val weatherInteractor: WeatherInteractor
 ) : ViewModel() {
 
-    val latestWeatherData by lazy { weatherInteractor.getCurrentWeather(false) }
+    val latestWeatherData by lazy {
+        weatherInteractor.getCurrentWeather(false)
+    }
 
-    private val refreshingState = MutableStateFlow(NOT_REFRESHING)
+    private val _isLoading = MutableStateFlow(false)
 
-    val isRefreshingInitiatedByUser
-        get() = refreshingState.map { it.isManual }.asLiveData()
+    val isLoading get() = _isLoading.asLiveData()
 
     private var isFirstLoadCall = true
 
     fun load() {
         if (isFirstLoadCall) {
             isFirstLoadCall = false
-            refresh(isManual = false)
+            refresh()
         }
     }
 
-    fun refresh() {
-        refresh(isManual = true)
-    }
-
-    private fun refresh(isManual: Boolean) = viewModelScope.launch {
-        if (refreshingState.value.isRefreshing) {
-            if (isManual)
-                refreshingState.value = REFRESHING_MANUAL
-        } else {
-            refreshingState.value =
-                if (isManual) REFRESHING_MANUAL else REFRESHING
+    fun refresh() = viewModelScope.launch {
+        if (!_isLoading.value) {
+            _isLoading.value = true
             weatherInteractor.refreshFromNetwork() // TODO check success
-            refreshingState.value = NOT_REFRESHING
+            _isLoading.value = false
         }
-    }
-
-    private enum class RefreshingState(
-        val isRefreshing: Boolean,
-        val isManual: Boolean
-    ) {
-        NOT_REFRESHING(false, false),
-        REFRESHING(true, false),
-        REFRESHING_MANUAL(true, true)
     }
 
 }

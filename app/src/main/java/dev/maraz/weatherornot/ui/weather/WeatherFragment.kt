@@ -65,7 +65,7 @@ class WeatherFragment : AbstractFragment<WeatherViewModel>(WeatherViewModel::cla
 
             } // ?: TODO("error state")
         }
-        viewModel.isRefreshingInitiatedByUser.observe(swipeRefreshLayout::setRefreshing)
+        viewModel.isLoading.observe(swipeRefreshLayout::setRefreshing)
         viewModel.load()
     }
 
