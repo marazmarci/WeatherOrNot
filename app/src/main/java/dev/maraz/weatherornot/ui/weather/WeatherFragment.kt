@@ -23,8 +23,4 @@ class WeatherFragment : Fragment() {
         viewModel = ViewModelProvider(this).get(WeatherViewModel::class.java)
     }
 
-    companion object {
-        fun newInstance() = WeatherFragment()
-    }
-
 }
