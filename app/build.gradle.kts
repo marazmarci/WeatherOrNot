@@ -90,6 +90,9 @@ dependencies {
     // SwipeRefreshLayout
     implementation("androidx.swiperefreshlayout:swiperefreshlayout:1.1.0")
 
+    // Coil
+    implementation("io.coil-kt:coil:1.1.1")
+
     // Desugar
     coreLibraryDesugaring("com.android.tools:desugar_jdk_libs:1.1.1")
 
