@@ -6,9 +6,10 @@ import dev.maraz.weatherornot.domain.model.WeatherState
 import java.time.LocalDate
 import java.time.LocalDateTime
 
-fun WeatherCastDataSet.toDbModels() = castData.map {
+fun WeatherCastDataSet.toDbModels() = castData.mapIndexed { i, it ->
     with(it) {
         DbWeatherCastData(
+            id = i + 1L,
             celsiusTemperature = celsiusTemperature,
             weatherStateAbbreviation = weatherState.abbreviation,
             weatherStateName = weatherState.name,

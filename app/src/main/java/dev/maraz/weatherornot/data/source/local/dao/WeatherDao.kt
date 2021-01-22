@@ -10,7 +10,7 @@ import dev.maraz.weatherornot.data.source.local.model.DbWeatherCastData
 @Dao
 interface WeatherDao {
 
-    @Query("SELECT * FROM weather_cast_data WHERE woeid = :woeid")
+    @Query("SELECT * FROM weather_cast_data WHERE woeid = :woeid ORDER BY id ASC")
     fun getWeatherCastData(woeid: Long): LiveData<List<DbWeatherCastData>>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)

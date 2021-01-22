@@ -5,6 +5,7 @@ import androidx.room.PrimaryKey
 
 @Entity(tableName = "weather_cast_data")
 data class DbWeatherCastData(
+    @PrimaryKey(autoGenerate = true) val id: Long,
     val celsiusTemperature: Double,
     val weatherStateAbbreviation: String,
     val weatherStateName: String,
@@ -12,5 +13,4 @@ data class DbWeatherCastData(
     val woeid: Long,
     val applicableDate: String,
     val timestampUpdated: String,
-    @PrimaryKey(autoGenerate = true) val id: Long = 0
 )
