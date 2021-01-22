@@ -26,6 +26,7 @@ class WeatherFragment : AbstractFragment<WeatherViewModel>(WeatherViewModel::cla
     override fun getViewResource() = R.layout.weather_fragment
 
     private val tvTemperature get() = view?.findViewById<TextView>(R.id.tvTemperature)!!
+    private val tvWeatherStateName get() = view?.findViewById<TextView>(R.id.tvWeatherStateName)!!
     private val tvLocationName get() = view?.findViewById<TextView>(R.id.tvLocationName)!!
     private val tvDataAge get() = view?.findViewById<TextView>(R.id.tvDataAge)!!
     private val ivWeather get() = view?.findViewById<ImageView>(R.id.ivWeather)!!
@@ -42,6 +43,8 @@ class WeatherFragment : AbstractFragment<WeatherViewModel>(WeatherViewModel::cla
                     R.string.celsius_template,
                     temperatureDecimalFormat.format(weather.celsiusTemperature)
                 )
+
+                tvWeatherStateName.text = weather.weatherState.name
 
                 tvLocationName.text = dataSet.locationName
 
@@ -73,7 +76,12 @@ class WeatherFragment : AbstractFragment<WeatherViewModel>(WeatherViewModel::cla
             toString()
                 .substring(2)
                 .replace("(\\d[HMS])(?!$)", "$1 ")
+                .replace("h", "h ")
+                .replace("m", "m ")
                 .toLowerCase(Locale.ROOT)
+                .let {
+                    resources.getString(R.string.time_ago_template, it)
+                }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
