@@ -1,4 +1,4 @@
-package dev.maraz.weatherornot.data.model
+package dev.maraz.weatherornot.domain.model
 
 data class WeatherState(
     val abbreviation: String,

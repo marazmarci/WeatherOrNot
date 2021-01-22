@@ -21,20 +21,20 @@ class WeatherFragment : AbstractFragment<WeatherViewModel>(WeatherViewModel::cla
 
     override fun onStart() {
         super.onStart()
-        viewModel.weatherData.observe { result ->
+        viewModel.latestWeatherData.observe { result ->
             tvTemperature.text = result.getOrNull()?.castData?.firstOrNull()?.let { todaysWeather ->
                 val tempStr = temperatureDecimalFormat.format(todaysWeather.celsiusTemperature)
                 "$tempStr °C"
             } ?: "error"
         }
         viewModel.isRefreshingInitiatedByUser.observe(swipeRefreshLayout::setRefreshing)
-        viewModel.refresh(isManual = false)
+        viewModel.load()
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         swipeRefreshLayout.setOnRefreshListener {
-            viewModel.refresh(isManual = true)
+            viewModel.refresh()
         }
     }
 

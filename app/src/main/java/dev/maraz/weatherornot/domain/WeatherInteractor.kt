@@ -1,12 +1,12 @@
-package dev.maraz.weatherornot.data
+package dev.maraz.weatherornot.domain
 
 import androidx.lifecycle.LiveData
 import dev.maraz.weatherornot.domain.model.WeatherCastDataSet
 
-interface WeatherRepository {
+interface WeatherInteractor {
 
     fun getCurrentWeather(): LiveData<Result<WeatherCastDataSet>>
 
-    suspend fun refreshFromNetwork(woeid: Long): Result<Unit>
+    suspend fun refreshFromNetwork(): Result<Unit>
 
 }

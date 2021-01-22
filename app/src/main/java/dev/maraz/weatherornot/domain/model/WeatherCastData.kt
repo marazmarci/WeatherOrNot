@@ -1,4 +1,4 @@
-package dev.maraz.weatherornot.data.model
+package dev.maraz.weatherornot.domain.model
 
 import java.time.LocalDate
 import java.time.LocalDateTime
